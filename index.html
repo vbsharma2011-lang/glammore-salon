@@ -1,0 +1,802 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Glam'more Beauty Salon | Harrisburg PA</title>
+    <meta name="description" content="Premium hair and beauty salon in Harrisburg, PA. Specializing in custom cuts, color, styling, and nail services.">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'glam-gold': '#D4AF37',
+                        'glam-rose': '#E8B4B8',
+                        'glam-dark': '#2C2C2C',
+                        'glam-cream': '#FAF7F2',
+                        'glam-charcoal': '#3A3A3A',
+                    },
+                    fontFamily: {
+                        'serif': ['Cormorant Garamond', 'serif'],
+                        'sans': ['Montserrat', 'sans-serif'],
+                    },
+                    animation: {
+                        'fade-in-up': 'fadeInUp 0.8s ease-out',
+                        'float': 'float 6s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        fadeInUp: {
+                            '0%': { opacity: '0', transform: 'translateY(30px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        },
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-20px)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        .glass-nav {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(212, 175, 55, 0.1);
+        }
+        
+        .text-glam-gradient {
+            background: linear-gradient(135deg, #D4AF37 0%, #E8B4B8 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .hero-pattern {
+            background-image: 
+                radial-gradient(circle at 20% 50%, rgba(212, 175, 55, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(232, 180, 184, 0.1) 0%, transparent 50%);
+        }
+        
+        .service-card {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(212, 175, 55, 0.15);
+        }
+        
+        .gallery-item {
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .gallery-item img {
+            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+        
+        .gallery-overlay {
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+        
+        .gallery-item:hover .gallery-overlay {
+            opacity: 1;
+        }
+        
+        .btn-glam {
+            background: linear-gradient(135deg, #D4AF37 0%, #C9A227 100%);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn-glam:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(212, 175, 55, 0.4);
+        }
+        
+        .btn-glam::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+            transition: left 0.5s ease;
+        }
+        
+        .btn-glam:hover::after {
+            left: 100%;
+        }
+        
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease-out;
+        }
+        
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .mobile-menu {
+            transform: translateX(100%);
+            transition: transform 0.3s ease-in-out;
+        }
+        
+        .mobile-menu.open {
+            transform: translateX(0);
+        }
+        
+        .hamburger span {
+            transition: all 0.3s ease-in-out;
+        }
+        
+        .hamburger.active span:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 5px);
+        }
+        
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+        }
+        
+        .hamburger.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(7px, -6px);
+        }
+    </style>
+</head>
+<body class="font-sans text-glam-charcoal bg-glam-cream antialiased">
+
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 glass-nav transition-all duration-300" id="navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <div class="flex-shrink-0 flex items-center">
+                    <a href="#" class="font-serif text-2xl md:text-3xl font-semibold text-glam-dark tracking-wide">
+                        Glam'<span class="text-glam-gold">more</span>
+                    </a>
+                </div>
+                
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex space-x-8 items-center">
+                    <a href="#home" class="text-sm font-medium hover:text-glam-gold transition-colors tracking-wider uppercase">Home</a>
+                    <a href="#services" class="text-sm font-medium hover:text-glam-gold transition-colors tracking-wider uppercase">Services</a>
+                    <a href="#about" class="text-sm font-medium hover:text-glam-gold transition-colors tracking-wider uppercase">About</a>
+                    <a href="#gallery" class="text-sm font-medium hover:text-glam-gold transition-colors tracking-wider uppercase">Gallery</a>
+                    <a href="#contact" class="btn-glam text-white px-6 py-2.5 rounded-full text-sm font-semibold tracking-wider uppercase">
+                        Book Now
+                    </a>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden flex items-center">
+                    <button class="hamburger focus:outline-none" id="menu-btn">
+                        <span class="block w-6 h-0.5 bg-glam-dark mb-1.5"></span>
+                        <span class="block w-6 h-0.5 bg-glam-dark mb-1.5"></span>
+                        <span class="block w-6 h-0.5 bg-glam-dark"></span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div class="mobile-menu fixed top-0 right-0 h-full w-64 bg-white shadow-2xl z-50 md:hidden" id="mobile-menu">
+            <div class="p-6 pt-20">
+                <div class="flex flex-col space-y-6">
+                    <a href="#home" class="text-lg font-medium text-glam-dark hover:text-glam-gold transition-colors">Home</a>
+                    <a href="#services" class="text-lg font-medium text-glam-dark hover:text-glam-gold transition-colors">Services</a>
+                    <a href="#about" class="text-lg font-medium text-glam-dark hover:text-glam-gold transition-colors">About</a>
+                    <a href="#gallery" class="text-lg font-medium text-glam-dark hover:text-glam-gold transition-colors">Gallery</a>
+                    <a href="#contact" class="btn-glam text-white px-6 py-3 rounded-full text-center font-semibold">Book Now</a>
+                    <div class="pt-6 border-t border-gray-100">
+                        <p class="text-sm text-gray-500">5610 Derry St, Harrisburg, PA</p>
+                        <p class="text-sm text-gray-500 mt-1">(717) 979-6375</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="relative min-h-screen flex items-center hero-pattern pt-20 overflow-hidden">
+        <div class="absolute inset-0 z-0">
+            <div class="absolute inset-0 bg-gradient-to-br from-glam-cream via-white to-glam-rose/10"></div>
+            <div class="absolute top-20 right-0 w-96 h-96 bg-glam-gold/5 rounded-full blur-3xl"></div>
+            <div class="absolute bottom-0 left-0 w-72 h-72 bg-glam-rose/10 rounded-full blur-3xl"></div>
+        </div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div class="animate-fade-in-up">
+                    <div class="inline-block mb-4 px-4 py-1.5 bg-glam-gold/10 rounded-full border border-glam-gold/20">
+                        <span class="text-glam-gold text-xs font-semibold tracking-widest uppercase">Est. Harrisburg, PA</span>
+                    </div>
+                    <h1 class="font-serif text-5xl md:text-7xl lg:text-8xl text-glam-dark leading-tight mb-6">
+                        Where <span class="text-glam-gradient italic">Beauty</span><br>
+                        Meets Art
+                    </h1>
+                    <p class="text-lg md:text-xl text-gray-600 mb-8 leading-relaxed max-w-lg">
+                        Experience luxury hair care and beauty services at Harrisburg's premier destination for transformation and style.
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-4">
+                        <a href="#contact" class="btn-glam text-white px-8 py-4 rounded-full text-sm font-semibold tracking-wider uppercase text-center">
+                            Book Appointment
+                        </a>
+                        <a href="#services" class="px-8 py-4 rounded-full text-sm font-semibold tracking-wider uppercase border-2 border-glam-dark text-glam-dark hover:bg-glam-dark hover:text-white transition-all text-center">
+                            Explore Services
+                        </a>
+                    </div>
+                    
+                    <div class="mt-12 flex items-center gap-8">
+                        <div>
+                            <p class="font-serif text-3xl text-glam-gold font-semibold">5+</p>
+                            <p class="text-xs text-gray-500 uppercase tracking-wider">Years Experience</p>
+                        </div>
+                        <div class="w-px h-12 bg-gray-200"></div>
+                        <div>
+                            <p class="font-serif text-3xl text-glam-gold font-semibold">1000+</p>
+                            <p class="text-xs text-gray-500 uppercase tracking-wider">Happy Clients</p>
+                        </div>
+                        <div class="w-px h-12 bg-gray-200"></div>
+                        <div>
+                            <p class="font-serif text-3xl text-glam-gold font-semibold">15+</p>
+                            <p class="text-xs text-gray-500 uppercase tracking-wider">Services</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="relative hidden md:block">
+                    <div class="relative z-10 animate-float">
+                        <div class="relative rounded-2xl overflow-hidden shadow-2xl">
+                            <img src="https://images.unsplash.com/photo-1560066984-138dadb4c035?w=800&h=1000&fit=crop" 
+                                 alt="Luxury Salon Interior" 
+                                 class="w-full h-auto object-cover">
+                            <div class="absolute inset-0 bg-gradient-to-t from-glam-dark/30 to-transparent"></div>
+                        </div>
+                        <div class="absolute -bottom-6 -left-6 bg-white p-6 rounded-xl shadow-xl max-w-xs">
+                            <div class="flex items-center gap-4">
+                                <div class="w-12 h-12 bg-glam-gold/10 rounded-full flex items-center justify-center">
+                                    <i class="fas fa-star text-glam-gold"></i>
+                                </div>
+                                <div>
+                                    <p class="font-serif text-lg font-semibold text-glam-dark">Premium Quality</p>
+                                    <p class="text-sm text-gray-500">Top-rated salon in Harrisburg</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="absolute -z-10 top-10 right-10 w-full h-full border-2 border-glam-gold/20 rounded-2xl"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="py-24 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 reveal">
+                <span class="text-glam-gold text-xs font-bold tracking-widest uppercase">Our Expertise</span>
+                <h2 class="font-serif text-4xl md:text-5xl text-glam-dark mt-3 mb-4">Signature Services</h2>
+                <div class="w-24 h-0.5 bg-glam-gold mx-auto"></div>
+                <p class="mt-6 text-gray-600 max-w-2xl mx-auto">From precision cuts to transformative color, we offer a full spectrum of luxury hair and nail services tailored to your unique style.</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Service Card 1 -->
+                <div class="service-card group bg-glam-cream rounded-2xl p-8 relative overflow-hidden reveal">
+                    <div class="absolute top-0 right-0 w-32 h-32 bg-glam-gold/5 rounded-bl-full -mr-8 -mt-8 transition-all group-hover:bg-glam-gold/10"></div>
+                    <div class="w-14 h-14 bg-white rounded-xl shadow-md flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                        <i class="fas fa-cut text-2xl text-glam-gold"></i>
+                    </div>
+                    <h3 class="font-serif text-2xl text-glam-dark mb-3">Precision Cuts</h3>
+                    <p class="text-gray-600 text-sm leading-relaxed mb-4">Custom cuts tailored to your face shape, lifestyle, and personal aesthetic. From classic to avant-garde.</p>
+                    <ul class="text-sm text-gray-500 space-y-2">
+                        <li class="flex items-center gap-2"><i class="fas fa-check text-glam-gold text-xs"></i> Women's Haircut</li>
+                        <li class="flex items-center gap-2"><i class="fas fa-check text-glam-gold text-xs"></i> Men's Styling</li>
+                        <li class="flex items-center gap-2"><i class="fas fa-check text-glam-gold text-xs"></i> Bangs & Trims</li>
+                    </ul>
+                </div>
+
+                <!-- Service Card 2 -->
+                <div class="service-card group bg-glam-cream rounded-2xl p-8 relative overflow-hidden reveal">
+                    <div class="absolute top-0 right-0 w-32 h-32 bg-glam-rose/10 rounded-bl-full -mr-8 -mt-8 transition-all group-hover:bg-glam-rose/20"></div>
+                    <div class="w-14 h-14 bg-white rounded-xl shadow-md flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                        <i class="fas fa-palette text-2xl text-glam-gold"></i>
+                    </div>
+                    <h3 class="font-serif text-2xl text-glam-dark mb-3">Color Artistry</h3>
+                    <p class="text-gray-600 text-sm leading-relaxed mb-4">Expert color services from subtle balayage to bold transformations. Corrective color specialists.</p>
+                    <ul class="text-sm text-gray-500 space-y-2">
+                        <li class="flex items-center gap-2"><i class="fas fa-check text-glam-gold text-xs"></i> Balayage & Ombre</li>
+                        <li class="flex items-center gap-2"><i class="fas fa-check text-glam-gold text-xs"></i> Highlights/Lowlights</li>
+                        <li class="flex items-center gap-2"><i class="fas fa-check text-glam-gold text-xs"></i> Root Touch-up</li>
+                    </ul>
+                </div>
+
+                <!-- Service Card 3 -->
+                <div class="service-card group bg-glam-cream rounded-2xl p-8 relative overflow-hidden reveal">
+                    <div class="absolute top-0 right-0 w-32 h-32 bg-glam-gold/5 rounded-bl-full -mr-8 -mt-8 transition-all group-hover:bg-glam-gold/10"></div>
+                    <div class="w-14 h-14 bg-white rounded-xl shadow-md flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                        <i class="fas fa-wind text-2xl text-glam-gold"></i>
+                    </div>
+                    <h3 class="font-serif text-2xl text-glam-dark mb-3">Styling & Treatments</h3>
+                    <p class="text-gray-600 text-sm leading-relaxed mb-4">Luxury treatments to restore, strengthen, and beautify your hair. Brazilian blowouts and keratin treatments.</p>
+                    <ul class="text-sm text-gray-500 space-y-2">
+                        <li class="flex items-center gap-2"><i class="fas fa-check text-glam-gold text-xs"></i> Brazilian Blowout</li>
+                        <li class="flex items-center gap-2"><i class="fas fa-check text-glam-gold text-xs"></i> Keratin Treatment</li>
+                        <li class="flex items-center gap-2"><i class="fas fa-check text-glam-gold text-xs"></i> Deep Conditioning</li>
+                    </ul>
+                </div>
+
+                <!-- Service Card 4 -->
+                <div class="service-card group bg-glam-cream rounded-2xl p-8 relative overflow-hidden reveal">
+                    <div class="absolute top-0 right-0 w-32 h-32 bg-glam-rose/10 rounded-bl-full -mr-8 -mt-8 transition-all group-hover:bg-glam-rose/20"></div>
+                    <div class="w-14 h-14 bg-white rounded-xl shadow-md flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                        <i class="fas fa-hand-sparkles text-2xl text-glam-gold"></i>
+                    </div>
+                    <h3 class="font-serif text-2xl text-glam-dark mb-3">Nail Services</h3>
+                    <p class="text-gray-600 text-sm leading-relaxed mb-4">Complete nail care from manicures to artistic nail designs. Gel, acrylic, and natural nail care.</p>
+                    <ul class="text-sm text-gray-500 space-y-2">
+                        <li class="flex items-center gap-2"><i class="fas fa-check text-glam-gold text-xs"></i> Manicures & Pedicures</li>
+                        <li class="flex items-center gap-2"><i class="fas fa-check text-glam-gold text-xs"></i> Gel & Acrylic</li>
+                        <li class="flex items-center gap-2"><i class="fas fa-check text-glam-gold text-xs"></i> Nail Art</li>
+                    </ul>
+                </div>
+
+                <!-- Service Card 5 -->
+                <div class="service-card group bg-glam-cream rounded-2xl p-8 relative overflow-hidden reveal">
+                    <div class="absolute top-0 right-0 w-32 h-32 bg-glam-gold/5 rounded-bl-full -mr-8 -mt-8 transition-all group-hover:bg-glam-gold/10"></div>
+                    <div class="w-14 h-14 bg-white rounded-xl shadow-md flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                        <i class="fas fa-magic text-2xl text-glam-gold"></i>
+                    </div>
+                    <h3 class="font-serif text-2xl text-glam-dark mb-3">Special Occasion</h3>
+                    <p class="text-gray-600 text-sm leading-relaxed mb-4">Bridal parties, proms, and special events. Elegant updos and glamorous styling for your big day.</p>
+                    <ul class="text-sm text-gray-500 space-y-2">
+                        <li class="flex items-center gap-2"><i class="fas fa-check text-glam-gold text-xs"></i> Bridal Styling</li>
+                        <li class="flex items-center gap-2"><i class="fas fa-check text-glam-gold text-xs"></i> Event Updos</li>
+                        <li class="flex items-center gap-2"><i class="fas fa-check text-glam-gold text-xs"></i> Makeup Services</li>
+                    </ul>
+                </div>
+
+                <!-- Service Card 6 -->
+                <div class="service-card group bg-glam-cream rounded-2xl p-8 relative overflow-hidden reveal">
+                    <div class="absolute top-0 right-0 w-32 h-32 bg-glam-rose/10 rounded-bl-full -mr-8 -mt-8 transition-all group-hover:bg-glam-rose/20"></div>
+                    <div class="w-14 h-14 bg-white rounded-xl shadow-md flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                        <i class="fas fa-spa text-2xl text-glam-gold"></i>
+                    </div>
+                    <h3 class="font-serif text-2xl text-glam-dark mb-3">Extensions</h3>
+                    <p class="text-gray-600 text-sm leading-relaxed mb-4">Premium hair extensions for length and volume. Tape-in, micro-ring, and fusion methods available.</p>
+                    <ul class="text-sm text-gray-500 space-y-2">
+                        <li class="flex items-center gap-2"><i class="fas fa-check text-glam-gold text-xs"></i> Tape Extensions</li>
+                        <li class="flex items-center gap-2"><i class="fas fa-check text-glam-gold text-xs"></i> Micro-ring</li>
+                        <li class="flex items-center gap-2"><i class="fas fa-check text-glam-gold text-xs"></i> Fusion Bonds</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-24 bg-glam-dark relative overflow-hidden">
+        <div class="absolute inset-0 opacity-10">
+            <div class="absolute top-0 left-0 w-full h-full" style="background-image: url('data:image/svg+xml,%3Csvg width=\'60\' height=\'60\' viewBox=\'0 0 60 60\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cg fill=\'none\' fill-rule=\'evenodd\'%3E%3Cg fill=\'%23ffffff\' fill-opacity=\'0.4\'%3E%3Cpath d=\'M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z\'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E');"></div>
+        </div>
+        
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="grid md:grid-cols-2 gap-16 items-center">
+                <div class="relative reveal">
+                    <div class="relative rounded-2xl overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1521590832167-7bcbfaa6381f?w=800&h=1000&fit=crop" 
+                             alt="Salon Professional" 
+                             class="w-full h-auto object-cover">
+                        <div class="absolute inset-0 bg-gradient-to-t from-glam-dark/60 to-transparent"></div>
+                    </div>
+                    <div class="absolute -bottom-8 -right-8 bg-glam-gold text-glam-dark p-8 rounded-xl max-w-xs hidden lg:block">
+                        <p class="font-serif text-4xl font-bold mb-2">5+</p>
+                        <p class="font-semibold">Years of Excellence</p>
+                        <p class="text-sm mt-2 opacity-80">Serving Harrisburg with passion and precision</p>
+                    </div>
+                </div>
+
+                <div class="text-white reveal">
+                    <span class="text-glam-gold text-xs font-bold tracking-widest uppercase">About Us</span>
+                    <h2 class="font-serif text-4xl md:text-5xl mt-3 mb-6">Redefining Beauty Standards</h2>
+                    <p class="text-gray-300 leading-relaxed mb-6">
+                        Located in the heart of Harrisburg at 5610 Derry Street, Glam'more Beauty Salon is your destination for luxury hair and nail services. We believe that beauty is personal, and every client deserves a customized experience.
+                    </p>
+                    <p class="text-gray-300 leading-relaxed mb-8">
+                        Our team of skilled professionals specializes in everything from precision cuts and custom color to Brazilian blowouts and special occasion styling. We use only premium products and stay current with the latest techniques to ensure you leave feeling confident and beautiful.
+                    </p>
+                    
+                    <div class="grid grid-cols-2 gap-6 mb-8">
+                        <div class="flex items-start gap-3">
+                            <i class="fas fa-certificate text-glam-gold mt-1"></i>
+                            <div>
+                                <h4 class="font-semibold mb-1">Certified Experts</h4>
+                                <p class="text-sm text-gray-400">Licensed professionals with ongoing training</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-3">
+                            <i class="fas fa-leaf text-glam-gold mt-1"></i>
+                            <div>
+                                <h4 class="font-semibold mb-1">Premium Products</h4>
+                                <p class="text-sm text-gray-400">Top-tier hair care and color lines</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-3">
+                            <i class="fas fa-heart text-glam-gold mt-1"></i>
+                            <div>
+                                <h4 class="font-semibold mb-1">Personalized Care</h4>
+                                <p class="text-sm text-gray-400">Tailored services for your unique needs</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-3">
+                            <i class="fas fa-award text-glam-gold mt-1"></i>
+                            <div>
+                                <h4 class="font-semibold mb-1">Award Winning</h4>
+                                <p class="text-sm text-gray-400">Recognized for excellence in Harrisburg</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <a href="#contact" class="inline-flex items-center gap-2 text-glam-gold hover:text-white transition-colors font-semibold">
+                        Book Your Experience <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section id="gallery" class="py-24 bg-glam-cream">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 reveal">
+                <span class="text-glam-gold text-xs font-bold tracking-widest uppercase">Portfolio</span>
+                <h2 class="font-serif text-4xl md:text-5xl text-glam-dark mt-3 mb-4">Our Work</h2>
+                <div class="w-24 h-0.5 bg-glam-gold mx-auto"></div>
+                <p class="mt-6 text-gray-600 max-w-2xl mx-auto">Browse our latest transformations and get inspired for your next visit.</p>
+            </div>
+
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                <div class="gallery-item rounded-xl aspect-[3/4] reveal">
+                    <img src="https://images.unsplash.com/photo-1562322140-8baeececf3df?w=600&h=800&fit=crop" alt="Hair Styling" class="w-full h-full object-cover">
+                    <div class="gallery-overlay absolute inset-0 bg-glam-dark/60 flex items-center justify-center">
+                        <i class="fas fa-plus text-white text-2xl"></i>
+                    </div>
+                </div>
+                <div class="gallery-item rounded-xl aspect-[3/4] reveal">
+                    <img src="https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=600&h=800&fit=crop" alt="Color Work" class="w-full h-full object-cover">
+                    <div class="gallery-overlay absolute inset-0 bg-glam-dark/60 flex items-center justify-center">
+                        <i class="fas fa-plus text-white text-2xl"></i>
+                    </div>
+                </div>
+                <div class="gallery-item rounded-xl aspect-[3/4] reveal">
+                    <img src="https://images.unsplash.com/photo-1580618672591-eb180b1a973f?w=600&h=800&fit=crop" alt="Balayage" class="w-full h-full object-cover">
+                    <div class="gallery-overlay absolute inset-0 bg-glam-dark/60 flex items-center justify-center">
+                        <i class="fas fa-plus text-white text-2xl"></i>
+                    </div>
+                </div>
+                <div class="gallery-item rounded-xl aspect-[3/4] reveal">
+                    <img src="https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?w=600&h=800&fit=crop" alt="Bridal Style" class="w-full h-full object-cover">
+                    <div class="gallery-overlay absolute inset-0 bg-glam-dark/60 flex items-center justify-center">
+                        <i class="fas fa-plus text-white text-2xl"></i>
+                    </div>
+                </div>
+                <div class="gallery-item rounded-xl aspect-[3/4] reveal">
+                    <img src="https://images.unsplash.com/photo-1516975080664-ed2fc6a32937?w=600&h=800&fit=crop" alt="Nail Art" class="w-full h-full object-cover">
+                    <div class="gallery-overlay absolute inset-0 bg-glam-dark/60 flex items-center justify-center">
+                        <i class="fas fa-plus text-white text-2xl"></i>
+                    </div>
+                </div>
+                <div class="gallery-item rounded-xl aspect-[3/4] reveal">
+                    <img src="https://images.unsplash.com/photo-1527799820374-dcf8d9d4a388?w=600&h=800&fit=crop" alt="Haircut" class="w-full h-full object-cover">
+                    <div class="gallery-overlay absolute inset-0 bg-glam-dark/60 flex items-center justify-center">
+                        <i class="fas fa-plus text-white text-2xl"></i>
+                    </div>
+                </div>
+                <div class="gallery-item rounded-xl aspect-[3/4] reveal">
+                    <img src="https://images.unsplash.com/photo-1492106087820-71f1a00d2b11?w=600&h=800&fit=crop" alt="Styling" class="w-full h-full object-cover">
+                    <div class="gallery-overlay absolute inset-0 bg-glam-dark/60 flex items-center justify-center">
+                        <i class="fas fa-plus text-white text-2xl"></i>
+                    </div>
+                </div>
+                <div class="gallery-item rounded-xl aspect-[3/4] reveal">
+                    <img src="https://images.unsplash.com/photo-1519699047748-de8e457a634e?w=600&h=800&fit=crop" alt="Beauty" class="w-full h-full object-cover">
+                    <div class="gallery-overlay absolute inset-0 bg-glam-dark/60 flex items-center justify-center">
+                        <i class="fas fa-plus text-white text-2xl"></i>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-12">
+                <a href="#" class="inline-flex items-center gap-2 px-8 py-3 border-2 border-glam-dark text-glam-dark rounded-full font-semibold hover:bg-glam-dark hover:text-white transition-all">
+                    <i class="fab fa-instagram"></i> Follow us on Instagram
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-24 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid lg:grid-cols-2 gap-16">
+                <div class="reveal">
+                    <span class="text-glam-gold text-xs font-bold tracking-widest uppercase">Visit Us</span>
+                    <h2 class="font-serif text-4xl md:text-5xl text-glam-dark mt-3 mb-6">Book Your Appointment</h2>
+                    <p class="text-gray-600 mb-8 leading-relaxed">
+                        Ready to transform your look? Visit us at our Harrisburg location or give us a call to schedule your appointment. Walk-ins welcome based on availability.
+                    </p>
+
+                    <div class="space-y-6 mb-8">
+                        <div class="flex items-start gap-4">
+                            <div class="w-12 h-12 bg-glam-gold/10 rounded-full flex items-center justify-center flex-shrink-0">
+                                <i class="fas fa-map-marker-alt text-glam-gold"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-glam-dark mb-1">Location</h4>
+                                <p class="text-gray-600">5610 Derry Street, Suite 2<br>Harrisburg, PA 17111</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start gap-4">
+                            <div class="w-12 h-12 bg-glam-gold/10 rounded-full flex items-center justify-center flex-shrink-0">
+                                <i class="fas fa-phone text-glam-gold"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-glam-dark mb-1">Phone</h4>
+                                <p class="text-gray-600">(717) 979-6375</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start gap-4">
+                            <div class="w-12 h-12 bg-glam-gold/10 rounded-full flex items-center justify-center flex-shrink-0">
+                                <i class="fas fa-envelope text-glam-gold"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-glam-dark mb-1">Email</h4>
+                                <p class="text-gray-600">glammorebeautysalon@gmail.com</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start gap-4">
+                            <div class="w-12 h-12 bg-glam-gold/10 rounded-full flex items-center justify-center flex-shrink-0">
+                                <i class="fas fa-clock text-glam-gold"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-glam-dark mb-1">Hours</h4>
+                                <ul class="text-gray-600 text-sm space-y-1">
+                                    <li class="flex justify-between w-48"><span>Monday:</span> <span>11:00 AM - 7:00 PM</span></li>
+                                    <li class="flex justify-between w-48"><span>Tuesday:</span> <span class="text-red-500">Closed</span></li>
+                                    <li class="flex justify-between w-48"><span>Wednesday:</span> <span>11:00 AM - 7:00 PM</span></li>
+                                    <li class="flex justify-between w-48"><span>Thursday:</span> <span>11:00 AM - 7:00 PM</span></li>
+                                    <li class="flex justify-between w-48"><span>Friday:</span> <span>11:00 AM - 7:00 PM</span></li>
+                                    <li class="flex justify-between w-48"><span>Saturday:</span> <span>11:00 AM - 7:00 PM</span></li>
+                                    <li class="flex justify-between w-48"><span>Sunday:</span> <span>11:00 AM - 7:00 PM</span></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="flex gap-4">
+                        <a href="https://facebook.com" target="_blank" class="w-12 h-12 bg-glam-dark text-white rounded-full flex items-center justify-center hover:bg-glam-gold transition-colors">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="https://instagram.com" target="_blank" class="w-12 h-12 bg-glam-dark text-white rounded-full flex items-center justify-center hover:bg-glam-gold transition-colors">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="https://yelp.com" target="_blank" class="w-12 h-12 bg-glam-dark text-white rounded-full flex items-center justify-center hover:bg-glam-gold transition-colors">
+                            <i class="fab fa-yelp"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="bg-glam-cream p-8 rounded-2xl reveal">
+                    <form class="space-y-6" onsubmit="event.preventDefault(); alert('Thank you for your message! We will contact you shortly.');">
+                        <div class="grid md:grid-cols-2 gap-6">
+                            <div>
+                                <label class="block text-sm font-semibold text-glam-dark mb-2">First Name</label>
+                                <input type="text" class="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-glam-gold focus:ring-2 focus:ring-glam-gold/20 outline-none transition-all" placeholder="Jane">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-semibold text-glam-dark mb-2">Last Name</label>
+                                <input type="text" class="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-glam-gold focus:ring-2 focus:ring-glam-gold/20 outline-none transition-all" placeholder="Doe">
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <label class="block text-sm font-semibold text-glam-dark mb-2">Phone</label>
+                            <input type="tel" class="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-glam-gold focus:ring-2 focus:ring-glam-gold/20 outline-none transition-all" placeholder="(717) 555-0123">
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-semibold text-glam-dark mb-2">Service Interested In</label>
+                            <select class="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-glam-gold focus:ring-2 focus:ring-glam-gold/20 outline-none transition-all bg-white">
+                                <option>Select a service...</option>
+                                <option>Haircut & Styling</option>
+                                <option>Color/Balayage</option>
+                                <option>Brazilian Blowout</option>
+                                <option>Nail Services</option>
+                                <option>Special Occasion</option>
+                                <option>Consultation</option>
+                            </select>
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-semibold text-glam-dark mb-2">Preferred Date</label>
+                            <input type="date" class="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-glam-gold focus:ring-2 focus:ring-glam-gold/20 outline-none transition-all">
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-semibold text-glam-dark mb-2">Message</label>
+                            <textarea rows="4" class="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-glam-gold focus:ring-2 focus:ring-glam-gold/20 outline-none transition-all" placeholder="Tell us about your hair goals..."></textarea>
+                        </div>
+
+                        <button type="submit" class="w-full btn-glam text-white py-4 rounded-lg font-semibold tracking-wider uppercase">
+                            Request Appointment
+                        </button>
+                        
+                        <p class="text-xs text-gray-500 text-center">
+                            We will confirm your appointment via phone or email within 24 hours.
+                        </p>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Map Section -->
+    <div class="w-full h-96 bg-gray-200 relative">
+        <iframe 
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3045.1234567890123!2d-76.7891234!3d40.2734567!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c8c8c8c8c8c8c8%3A0x1234567890abcdef!2s5610%20Derry%20St%2C%20Harrisburg%2C%20PA%2017111!5e0!3m2!1sen!2sus!4v1234567890123!5m2!1sen!2sus" 
+            width="100%" 
+            height="100%" 
+            style="border:0;" 
+            allowfullscreen="" 
+            loading="lazy" 
+            referrerpolicy="no-referrer-when-downgrade"
+            class="absolute inset-0">
+        </iframe>
+        <div class="absolute top-4 left-4 bg-white p-4 rounded-lg shadow-lg max-w-sm z-10 hidden md:block">
+            <h4 class="font-serif text-lg font-semibold text-glam-dark mb-1">Glam'more Beauty Salon</h4>
+            <p class="text-sm text-gray-600">5610 Derry St, Harrisburg, PA 17111</p>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-glam-dark text-white py-12 border-t border-white/10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-4 gap-8 mb-8">
+                <div class="col-span-2">
+                    <a href="#" class="font-serif text-3xl font-semibold tracking-wide inline-block mb-4">
+                        Glam'<span class="text-glam-gold">more</span>
+                    </a>
+                    <p class="text-gray-400 text-sm leading-relaxed max-w-md mb-6">
+                        Harrisburg's premier destination for luxury hair and nail services. We are dedicated to enhancing your natural beauty through expert care and personalized attention.
+                    </p>
+                    <div class="flex gap-4">
+                        <a href="#" class="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-glam-gold transition-colors">
+                            <i class="fab fa-facebook-f text-sm"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-glam-gold transition-colors">
+                            <i class="fab fa-instagram text-sm"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-glam-gold transition-colors">
+                            <i class="fab fa-yelp text-sm"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h4 class="font-semibold mb-4 text-glam-gold">Quick Links</h4>
+                    <ul class="space-y-2 text-sm text-gray-400">
+                        <li><a href="#home" class="hover:text-white transition-colors">Home</a></li>
+                        <li><a href="#services" class="hover:text-white transition-colors">Services</a></li>
+                        <li><a href="#about" class="hover:text-white transition-colors">About Us</a></li>
+                        <li><a href="#gallery" class="hover:text-white transition-colors">Gallery</a></li>
+                        <li><a href="#contact" class="hover:text-white transition-colors">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="font-semibold mb-4 text-glam-gold">Contact</h4>
+                    <ul class="space-y-3 text-sm text-gray-400">
+                        <li class="flex items-start gap-2">
+                            <i class="fas fa-map-marker-alt mt-1 text-glam-gold"></i>
+                            <span>5610 Derry St, Suite 2<br>Harrisburg, PA 17111</span>
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <i class="fas fa-phone text-glam-gold"></i>
+                            <span>(717) 979-6375</span>
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <i class="fas fa-envelope text-glam-gold"></i>
+                            <span>glammorebeautysalon@gmail.com</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+                <p class="text-sm text-gray-500">&copy; 2026 Glam'more Beauty Salon. All rights reserved.</p>
+                <p class="text-sm text-gray-500">Designed with <i class="fas fa-heart text-glam-gold mx-1"></i> in Harrisburg, PA</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Menu Toggle
+        const menuBtn = document.getElementById('menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const mobileLinks = mobileMenu.querySelectorAll('a');
+
+        menuBtn.addEventListener('click', () => {
+            menuBtn.classList.toggle('active');
+            mobileMenu.classList.toggle('open');
+        });
+
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                menuBtn.classList.remove('active');
+                mobileMenu.classList.remove('open');
+            });
+        });
+
+        // Scroll Reveal Animation
+        const revealElements = document.querySelectorAll('.reveal');
+        
+        const reveal = () => {
+            revealElements.forEach(element => {
+                const windowHeight = window.innerHeight;
+                const elementTop = element.getBoundingClientRect().top;
+                const elementVisible = 150;
+                
+                if (elementTop < windowHeight - elementVisible) {
+                    element.classList.add('active');
+                }
+            });
+        };
+
+        window.addEventListener('scroll', reveal);
+        reveal(); // Trigger once on load
+
+        // Navbar Background on Scroll
+        const navbar = document.getElementById('navbar');
+        
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('shadow-md');
+            } else {
+                navbar.classList.remove('shadow-md');
+            }
+        });
+
+        // Smooth Scroll for Anchor Links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
